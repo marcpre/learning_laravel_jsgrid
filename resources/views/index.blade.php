@@ -103,9 +103,10 @@
         var storedTasks = [
                 @foreach($storedTasks as $task) 
                 {
-                    name: "{{ $task->name }}",
-                    created_at: "{{ $task->created_at }}",
-                    updated_at: "{{ $task->updated_at }}"
+                    Name: "{{ $task->name }}",
+                    Revision_Status: "{{ $task->revision_status }}",
+                    Created_At: "{{ $task->created_at }}",
+                    Updated_At: "{{ $task->updated_at }}"
                 },
                 @endforeach
             ];
