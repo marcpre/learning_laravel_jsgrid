@@ -25,21 +25,21 @@ $(function () {
                 console.log("item: " + item)
                 return $.ajax({
                     type: "POST",
-                    url: "/clients/",
+                    url: "/tasks/",
                     data: storedTasks
                 });
             },
             updateItem: function(item) {
                 return $.ajax({
                     type: "PUT",
-                    url: "/clients/",
+                    url: "/tasks/",
                     data: item
                 });
             },
             deleteItem: function(item) {
                 return $.ajax({
                     type: "DELETE",
-                    url: "/clients/",
+                    url: "/tasks/",
                     data: item
                 });
             }
