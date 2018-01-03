@@ -1,17 +1,49 @@
-
- var clients = storedTasks;
+$(function () {
 
     $("#jsGrid").jsGrid({
         width: "100%",
         height: "400px",
-
+        
+        filtering: true,
         inserting: true,
         editing: true,
         sorting: true,
         paging: true,
+        autoload: true,
 
-        data: clients,
-
+        data: storedTasks,
+        controller: {
+            loadData: function(filter) {
+                console.log("Filter: "+ filter)
+                return $.ajax({
+                    type: "GET",
+                    url: "/tasks/",
+                    data: storedTasks
+                });
+            },
+            insertItem: function(item) {
+                console.log("item: " + item)
+                return $.ajax({
+                    type: "POST",
+                    url: "/clients/",
+                    data: storedTasks
+                });
+            },
+            updateItem: function(item) {
+                return $.ajax({
+                    type: "PUT",
+                    url: "/clients/",
+                    data: item
+                });
+            },
+            deleteItem: function(item) {
+                return $.ajax({
+                    type: "DELETE",
+                    url: "/clients/",
+                    data: item
+                });
+            }
+        },
         fields: [{
                 name: "Name",
                 type: "text",
@@ -29,9 +61,9 @@
                 width: 200
             },
             {
-                name: "Revision_Status",
+                name: "revision_status",
                 type: "checkbox",
-                title: "revised",
+                title: "Revision Status",
                 sorting: false
             },
             {
@@ -39,8 +71,4 @@
             }
         ]
     });
-    
-    $("#sort").click(function() {
-        var field = $("#sortingField").val();
-        $("#jsGrid").jsGrid("sort", field);
-    });
+});
